@@ -25,8 +25,9 @@ class Led:
             return
         if self.port == port:
             return
-        GPIO.output(port, GPIO.LOW)
+        GPIO.output(self.port, GPIO.LOW)
         GPIO.output(port, GPIO.HIGH)
+        self.port = port
 
     @staticmethod
     def clear():

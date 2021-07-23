@@ -13,7 +13,14 @@ class Co2Sensor:
     def read_data(self):
         while not self.ccs811.data_ready:
             pass
-        return {
-            'co2': self.ccs811.eco2,
-            'tvoc': self.ccs811.tvoc,
-        }
+        try:
+            result = {
+                'co2': self.ccs811.eco2,
+                'tvoc': self.ccs811.tvoc,
+            }
+        except OSError as e:
+            return {
+                'co2': -1,
+                'tvoc': -1,
+            }
+        return result

@@ -25,7 +25,8 @@ class Led:
             return
         if self.port == port:
             return
-        GPIO.output(self.port, GPIO.LOW)
+        if self.port != 0:
+            GPIO.output(self.port, GPIO.LOW)
         GPIO.output(port, GPIO.HIGH)
         self.port = port
 

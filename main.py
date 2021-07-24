@@ -12,7 +12,7 @@ while True:
     value = sensor.read_data()
     led.select(co2_judge(value['co2']))
     count = count + 1
-    if count > 20:
+    if count >= 20:
         logger.log('co2', value['co2'])
         count = 0;
     sleep(3)

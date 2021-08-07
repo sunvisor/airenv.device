@@ -10,7 +10,6 @@ led = Led()
 logger = Logger('home_office')
 switch = Switch(led, sensor)
 
-
 count = 0
 try:
     while True:

@@ -26,4 +26,9 @@ class Co2Sensor:
                 'co2': -1,
                 'tvoc': -1,
             }
+        except RuntimeError as e:
+            return {
+                'co2': -1,
+                'tvoc': -1,
+            }
         return result

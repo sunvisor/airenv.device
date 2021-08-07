@@ -15,4 +15,4 @@ class Logger:
 
 if __name__ == "__main__":
     logger = Logger('test')
-    logger.log('co2', 500);
+    logger.log('co2', 500)

@@ -35,9 +35,10 @@ class Led:
         self.port = port
 
     def blink_start(self, color, interval):
-        self.clear()
-        self._blink_timer = Timer(interval, self.on_blink, (color, ))
-        self._blink_timer.start()
+        if self._blink_timer is None:
+            self.clear()
+            self._blink_timer = Timer(interval, self.on_blink, (color, ))
+            self._blink_timer.start()
 
     def blink_stop(self):
         if self._blink_timer is None:

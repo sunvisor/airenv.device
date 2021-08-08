@@ -44,7 +44,7 @@ class Led:
 
         if self._blink_timer is None:
             self._blink_timer = Timer(interval, handler, (color, interval, ))
-        self._blink_timer.start()
+            self._blink_timer.start()
 
     def blink_stop(self):
         if self._blink_timer is None:

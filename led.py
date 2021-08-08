@@ -39,9 +39,11 @@ class Led:
             port = self.color_map.get(color, 0)
             self.toggle_blink_status()
             GPIO.output(port, self._blink_status)
+            self._blink_timer = None
             self.blink_start(color, interval)
 
-        self._blink_timer = Timer(interval, handler, (color, interval, ))
+        if self._blink_timer is None:
+            self._blink_timer = Timer(interval, handler, (color, interval, ))
         self._blink_timer.start()
 
     def blink_stop(self):

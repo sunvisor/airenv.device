@@ -35,10 +35,14 @@ class Led:
         self.port = port
 
     def blink_start(self, color, interval):
-        if self._blink_timer is None:
-            self.clear()
-            self._blink_timer = Timer(interval, self.on_blink, (color, ))
-            self._blink_timer.start()
+        def handler(color, interval):
+            port = self.color_map.get(color, 0)
+            self.toggle_blink_status()
+            GPIO.output(port, self._blink_status)
+            self.blink_start(color, interval)
+
+        self._blink_timer = Timer(interval, handler, (color, interval, ))
+        self._blink_timer.start()
 
     def blink_stop(self):
         if self._blink_timer is None:
@@ -46,11 +50,6 @@ class Led:
         self._blink_timer.cancel()
         self._blink_timer = None
         self.clear()
-
-    def on_blink(self, color):
-        port = self.color_map.get(color, 0)
-        self.toggle_blink_status()
-        GPIO.output(port, self._blink_status)
 
     def toggle_blink_status(self):
         if self._blink_status == GPIO.LOW:

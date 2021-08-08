@@ -42,7 +42,7 @@ class Led:
     def blink_stop(self):
         if self._blink_timer is None:
             return
-        self._blink_timer.stop()
+        self._blink_timer.cancel()
         self._blink_timer = None
         self.clear()
 

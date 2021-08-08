@@ -13,13 +13,16 @@ switch = Switch(led, sensor)
 count = 0
 try:
     while True:
+        sleep(1)
         value = sensor.read_data()
         co2 = value['co2']
         count = count + 1
+        if not sensor.is_reliable():
+            led.blink_start('green', 1)
+            continue
         if co2 > 400 and count >= 60:
             led.select(co2_judge(co2))
             logger.log('co2', co2)
             count = 0
-        sleep(1)
 except KeyboardInterrupt:
     led.clear()
